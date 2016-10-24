@@ -13,7 +13,7 @@ Command line length, define cmdline buffer size. Set max number of chars + 1,
 because last byte of buffer need to contain '\0' - NULL terminator, and 
 not use for storing inputed char.
 If user input chars more then it parametrs-1, chars not added to command line.*/
-#define _COMMAND_LINE_LEN (1+100)									// for 32 chars
+#define _COMMAND_LINE_LEN (1+64)									// for 32 chars
 
 /*
 Command token number, define max token it command line, if number of token 
@@ -27,8 +27,7 @@ Token is word separate by white space, for example 3 token line:
 Define you prompt string here. You can use colors escape code, for highlight you prompt,
 for example this prompt will green color (if you terminal supports color)*/
 //#define _PROMPT_DEFAULT "\033[32mIRin >\033[0m "	// green color
-#define _PROMPT_DEFAULT "\033[32mIRin >\033[0m "	// green color
-//#define _PROMPT_DEFAULT "IRin > "
+#define _PROMPT_DEFAULT "knixx> "
 
 /*
 Define prompt text (without ESC sequence, only text) prompt length, it needs because if you use
@@ -39,7 +38,7 @@ ESC sequence, it's not possible detect only text length*/
 now if user press TAB calls 'copmlitetion' callback. If you no need it, you can just set 
 NULL to callback ptr and do not use it, but for memory saving tune, 
 if you are not going to use it - disable this define.*/
-#define _USE_COMPLETE
+#undef _USE_COMPLETE
 
 /*Define it, if you wanna use history. It s work's like bash history, and
 set stored value to cmdline, if UP and DOWN key pressed. Using history add
@@ -65,7 +64,7 @@ If not defined, use my own u16int_to_str variant, it's save about 800 byte of co
 on AVR (avr-gcc build).
 Try to build with and without, and compare total code size for tune library.
 */
-#define _USE_LIBC_STDIO
+#undef _USE_LIBC_STDIO
 
 /*
 Enable 'interrupt signal' callback, if user press Ctrl+C */
@@ -80,7 +79,7 @@ already initialize and ready to print message */
 
 /*
 New line symbol */
-#define _ENDL_LF
+#define _ENDL_CR
 
 #if defined(_ENDL_CR)
 #define ENDL "\r"
